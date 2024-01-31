@@ -1,11 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Exports\TimesheetExport;
 use App\Imports\EmployeeImport;
 use App\Imports\TimeSheetImport;
 use App\Models\Employee;
+use App\Models\UserProjectMapping;
+use App\Models\ProjectAssign;
+use App\Models\User;
 use App\Models\TimeSheet;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,21 +17,16 @@ class TimeSheetController extends Controller
 {
     public function index(Request $request)
     {
+        
         if(\Auth::user()->can('Manage TimeSheet'))
         {
             $employeesList = [];
-            if(\Auth::user()->type == 'employee')
+            
+            if(\Auth::user()->type == 'company' || \Auth::user()->type == 'CEO' || \Auth::user()->type == 'Team Lead' || \Auth::user()->type == 'HR')
             {
-                $timeSheets = TimeSheet::where('employee_id', \Auth::user()->id)->get();
-            }
-            else
-            {
-                $employeesList = Employee::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'user_id');
+                $employeesList = User::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'user_id');
                 $employeesList->prepend('All', '');
-                // dd($employeesList);
-
-                $timesheets = TimeSheet::where('created_by', \Auth::user()->creatorId());
-
+                $timesheets = TimeSheet::where('created_by', '=', \Auth::user()->creatorId());
                 if(!empty($request->start_date) && !empty($request->end_date))
                 {
                     $timesheets->where('date', '>=', $request->start_date);
@@ -42,7 +39,13 @@ class TimeSheetController extends Controller
                 }
                 $timeSheets = $timesheets->get();
             }
-
+            else
+            {
+                $timeSheets = TimeSheet::where('employee_id', \Auth::user()->id)->orderBy('date', 'desc')->get();
+                // print "<pre>";
+                // print_r($timeSheets);exit;
+            }
+            
             return view('timeSheet.index', compact('timeSheets', 'employeesList'));
         }
         else
@@ -56,9 +59,21 @@ class TimeSheetController extends Controller
 
         if(\Auth::user()->can('Create TimeSheet'))
         {
-            $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'user_id');
 
-            return view('timeSheet.create', compact('employees'));
+            $userID = \Auth::user()->id;
+            $currentUser = User::find($userID);
+            $projectIds = UserProjectMapping::where('user_id','=',$userID)->pluck('project_id')->toArray();
+            $projectNames = ProjectAssign::whereIn('project_id',$projectIds)
+            ->get(['project_name','project_id']);
+            if($currentUser)
+            {
+                $employees = User::where('id', '=' , $currentUser->id)->get()->pluck('name','id');
+                return view('timeSheet.create', compact('employees','currentUser','projectNames'));
+            }
+            else
+            {
+                return redirect()->back()->with('error', 'User Not Found.');
+            }
         }
         else
         {
@@ -68,6 +83,7 @@ class TimeSheetController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
         if(\Auth::user()->can('Create TimeSheet'))
         {
             $timeSheet = new Timesheet();
@@ -90,6 +106,7 @@ class TimeSheetController extends Controller
             $timeSheet->date       = $request->date;
             $timeSheet->hours      = $request->hours;
             $timeSheet->remark     = $request->remark;
+            $timeSheet->project_name     = $request->project_name;
             $timeSheet->created_by = \Auth::user()->creatorId();
             $timeSheet->save();
 
@@ -109,11 +126,12 @@ class TimeSheetController extends Controller
 
     public function edit(TimeSheet $timeSheet, $id)
     {
-
         if(\Auth::user()->can('Edit TimeSheet'))
         {
-            $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'user_id');
+            $employees = User::where('id', '=', \Auth::user()->id)->get()->pluck('name', 'id');
             $timeSheet = Timesheet::find($id);
+            // print "<pre>";
+            // print_r($timeSheet);exit;
 
             return view('timeSheet.edit', compact('timeSheet', 'employees'));
         }
@@ -127,8 +145,11 @@ class TimeSheetController extends Controller
     {
         if(\Auth::user()->can('Edit TimeSheet'))
         {
-
+            // dd($request->all());
             $timeSheet = Timesheet::find($id);
+            // print_r($timeSheet);exit;
+            if($timeSheet)
+            {
             if(\Auth::user()->type == 'employee')
             {
                 $timeSheet->employee_id = \Auth::user()->id;
@@ -148,8 +169,13 @@ class TimeSheetController extends Controller
             $timeSheet->date   = $request->date;
             $timeSheet->hours  = $request->hours;
             $timeSheet->remark = $request->remark;
+            $timeSheet->project_name = $request->project_name;
             $timeSheet->save();
-
+        }
+        else
+        {
+            return redirect()->back()->with('error', __('First Assign project to this user'));
+        }
             return redirect()->route('timesheet.index')->with('success', __('TimeSheet successfully updated.'));
         }
         else

@@ -40,6 +40,12 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="info text-sm font-style">
+                                    <strong>{{__('Last Name')}}</strong>
+                                    <span>{{$employee->last_name}}</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info text-sm font-style">
                                     <strong>{{__('Email')}}</strong>
                                     <span>{{$employee->email}}</span>
                                 </div>

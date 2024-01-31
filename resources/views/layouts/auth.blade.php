@@ -6,7 +6,9 @@
     <link rel="icon" href="{{asset(Storage::url('uploads/logo')).'/favicon.png'}}" type="image" sizes="16x16">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{(Utility::getValByName('title_text')) ? Utility::getValByName('title_text') : config('app.name', 'HRMS')}} - @yield('page-title')</title>
+    <title>
+        {{(Utility::getValByName('title_text')) ? Utility::getValByName('title_text') : config('app.name', 'HRMS')}} - @yield('page-title')
+    </title>
 
     <script src="{{ asset('js/app.js') }}" defer></script>
     <link rel="dns-prefetch" href="//fonts.gstatic.com">

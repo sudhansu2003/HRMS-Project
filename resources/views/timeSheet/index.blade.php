@@ -94,6 +94,7 @@
                                     <th>{{ __('Date') }}</th>
                                     <th>{{ __('Hours') }}</th>
                                     <th>{{ __('Description') }}</th>
+                                    <th>{{ __('Project Name') }}</th>
                                     <th width="200px">{{ __('Action') }}</th>
                                 </tr>
                             </thead>
@@ -106,6 +107,7 @@
                                         <td>{{ \Auth::user()->dateFormat($timeSheet->date) }}</td>
                                         <td>{{ $timeSheet->hours }}</td>
                                         <td>{{ $timeSheet->remark }}</td>
+                                        <td>{{ $timeSheet->project_name }}</td>
                                         <td>
                                             @can('Edit TimeSheet')
                                                 <a href="#" data-url="{{ route('timesheet.edit', $timeSheet->id) }}"

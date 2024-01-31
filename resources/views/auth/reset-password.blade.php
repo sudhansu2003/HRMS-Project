@@ -46,7 +46,7 @@
                 {{Form::close()}}
             </div>
             <h5 class="copyright-text">
-                {{(Utility::getValByName('footer_text')) ? Utility::getValByName('footer_text') :  __('Copyright HRMGo') }} {{ date('Y') }}
+                {{(Utility::getValByName('footer_text')) ? Utility::getValByName('footer_text') :  __('Copyright HRMS') }} {{ date('Y') }}
             </h5>
         </div>
     </div>

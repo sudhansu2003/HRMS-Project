@@ -10,7 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{(Utility::getValByName('title_text')) ? Utility::getValByName('title_text') : config('app.name', 'HRMGo')}}</title>
+    <?php /** (Utility::getValByName('title_text')) ? Utility::getValByName('title_text') : */?>
+    <title>{{ config('app.name', 'HRMS')}}</title>
     <link rel="icon" href="{{$logo.'/'.(isset($company_favicon) && !empty($company_favicon)?$company_favicon:'favicon.png')}}" type="image" sizes="16x16">
     <!-- Landing External CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('landing/css/font-awesome.min.css') }}">

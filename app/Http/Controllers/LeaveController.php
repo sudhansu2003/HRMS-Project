@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\LeaveExport;
 use App\Models\Employee;
+use App\Models\User;
 use App\Models\Leave;
 use App\Models\LeaveType;
 use App\Mail\LeaveActionSend;
@@ -17,10 +18,10 @@ class LeaveController extends Controller
 {
     public function index()
     {
-
         if(\Auth::user()->can('Manage Leave'))
         {
             $leaves = Leave::where('created_by', '=', \Auth::user()->creatorId())->get();
+            
             if(\Auth::user()->type == 'employee')
             {
                 $user     = \Auth::user();
@@ -31,7 +32,6 @@ class LeaveController extends Controller
             {
                 $leaves = Leave::where('created_by', '=', \Auth::user()->creatorId())->get();
             }
-
             return view('leave.index', compact('leaves'));
         }
         else
@@ -46,15 +46,15 @@ class LeaveController extends Controller
         {
             if(Auth::user()->type == 'employee')
             {
-                $employees = Employee::where('user_id', '=', \Auth::user()->id)->get()->pluck('name', 'id');
+                $employees = User::where('id', '=', \Auth::user()->id)->get()->pluck('name', 'id');
             }
             else
             {
-                $employees = Employee::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
+                $employees = User::where('created_by', '=', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             }
             $leavetypes      = LeaveType::where('created_by', '=', \Auth::user()->creatorId())->get();
             $leavetypes_days = LeaveType::where('created_by', '=', \Auth::user()->creatorId())->get();
-
+            
 //            dd(Employee::employeeTotalLeave(1));
             return view('leave.create', compact('employees', 'leavetypes', 'leavetypes_days'));
         }

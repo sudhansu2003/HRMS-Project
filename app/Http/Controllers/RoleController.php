@@ -14,15 +14,13 @@ class RoleController extends Controller
     {
         if(\Auth::user()->can('Manage Role'))
         {
-            $roles = Role::where('created_by', '=', \Auth::user()->creatorId())->get();
-
+            $roles = Role::get();
             return view('role.index')->with('roles', $roles);
         }
         else
         {
             return redirect()->back()->with('error', 'Permission denied.');
         }
-
     }
 
     public function create()
@@ -33,6 +31,8 @@ class RoleController extends Controller
             if($user->type == 'super admin' || $user->type == 'company')
             {
                 $permissions = Permission::all()->pluck('name', 'id')->toArray();
+                // print "<pre>";
+                // print_r($permissions);exit;
             }
             else
             {

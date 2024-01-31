@@ -10,6 +10,7 @@ class AttendanceEmployee extends Model
         'employee_id',
         'date',
         'status',
+        'wfh_flag',
         'clock_in',
         'clock_out',
         'late',

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\Models\AttendanceEmployee;
 use App\Models\Branch;
 use App\Models\Department;
@@ -20,9 +20,13 @@ class AttendanceEmployeeController extends Controller
         {
             $branch = Branch::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $branch->prepend('All', '');
-
+            // print "<pre>";
+            // print_r($branch);exit;
             $department = Department::where('created_by', \Auth::user()->creatorId())->get()->pluck('name', 'id');
             $department->prepend('All', '');
+            // print "<pre>";
+            // print_r($department);exit;
+            // dd($department);exit;
 
             if(\Auth::user()->type == 'employee')
             {
@@ -122,7 +126,8 @@ class AttendanceEmployeeController extends Controller
                 $attendanceEmployee = $attendanceEmployee->get();
 
             }
-
+            // print "<pre>";
+            // print_r($department);exit;
             return view('attendance.index', compact('attendanceEmployee', 'branch', 'department'));
         }
         else
@@ -143,8 +148,7 @@ class AttendanceEmployeeController extends Controller
         {
             return redirect()->back()->with('error', __('Permission denied.'));
         }
-
-
+        
     }
 
     public function store(Request $request)
@@ -359,22 +363,26 @@ class AttendanceEmployeeController extends Controller
     public function attendance(Request $request)
     {
         $settings = Utility::settings();
-
+        // print "<pre>";
+        // print_r($settings);exit;
+         // echo $settings['ip_restrict'];exit;
         if($settings['ip_restrict'] == 'on')
         {
             $userIp = request()->ip();
             $ip     = IpRestrict::where('created_by', \Auth::user()->creatorId())->whereIn('ip', [$userIp])->first();
+            // print_r($ip);exit;
             if(empty($ip))
             {
                 return redirect()->back()->with('error', __('this ip is not allowed to clock in & clock out.'));
             }
         }
-
-        $employeeId      = !empty(\Auth::user()->employee) ? \Auth::user()->employee->id : 0;
+        
+        $employeeId      = !empty(\Auth::user()->id) ? \Auth::user()->id: $id;
+        // print "<pre>";
+        // print_r($employeeId);exit;
         $todayAttendance = AttendanceEmployee::where('employee_id', '=', $employeeId)->where('date', date('Y-m-d'))->first();
         if(empty($todayAttendance))
         {
-
             $startTime = Utility::getValByName('company_start_time');
             $endTime   = Utility::getValByName('company_end_time');
 
@@ -413,7 +421,7 @@ class AttendanceEmployeeController extends Controller
                 $employeeAttendance->overtime      = '00:00:00';
                 $employeeAttendance->total_rest    = '00:00:00';
                 $employeeAttendance->created_by    = \Auth::user()->id;
-
+                
                 $employeeAttendance->save();
 
                 return redirect()->route('home')->with('success', __('Employee Successfully Clock In.'));
@@ -445,6 +453,127 @@ class AttendanceEmployeeController extends Controller
             return redirect()->back()->with('error', __('Employee are not allow multiple time clock in & clock for every day.'));
         }
     }
+
+    public function manageAttendance(Request $request)
+    {
+       
+        //dd($request->all());exit;
+
+        $date = $request->input('date',now()->format('y-m-d'));
+        $id = \Auth::user()->id;
+        // echo $id;exit;
+        if($id == 96)
+        {
+            if(\Auth::user()->can('Manage Attendance'))
+            {
+                if($request->has('search'))
+                {
+                    $result = User::leftJoin('attendance_employees', function ($join) use ($date) {
+                        $join->on('users.id', '=', 'attendance_employees.employee_id') 
+                            ->where('attendance_employees.date', '=', $date);
+                    })
+                    ->select(
+                        'users.id',
+                        'users.name',
+                        'attendance_employees.date',
+                        'attendance_employees.employee_id',
+                        'attendance_employees.status'
+                    )
+                    ->get();
+                }
+                elseif($request->input('updateStatus') == 'true')
+                { 
+                    //dd($request->all());
+                    $date = $request->date;
+                    $employeeId = $request->input('employeeId');
+                    $newStatus = $request->input('newStatus');
+                    
+                    if($request->input('wfhStatus') == 1 ){
+                        //dd($request->all());
+                        AttendanceEmployee::where('employee_id', $employeeId)
+                        ->where('date', $date)
+                        ->update(['status' => $newStatus,'wfh_flag'=> 1 ]);
+                    }
+                    else{
+                        //echo 10;exit;
+                        AttendanceEmployee::where('employee_id', $employeeId)
+                        ->where('date', $date)
+                        ->update(['status' => $newStatus,'wfh_flag'=> 0 ]);
+                    }
+                    
+                    $result = User::leftJoin('attendance_employees', function ($join) use ($date) {
+                        $join->on('users.id', '=', 'attendance_employees.employee_id') 
+                            ->where('attendance_employees.date', '=', $date);
+                    })
+                    ->select(
+                        'users.id',
+                        'users.name',
+                        'attendance_employees.date',
+                        'attendance_employees.employee_id',
+                        'attendance_employees.status',
+                        'attendance_employees.wfh_flag'
+                    )
+                    ->get();
+                }
+                elseif ($request->input('insertRecord') == 'true') {
+
+                    // dd($request->all());
+                    $status = $request->input('status');
+                    
+
+                    $data = [
+                        'employee_id' => $request->input('employeeId'),
+                        'date' => $request->input('date'),
+                        'status' => $status,
+                        'clock_in' => $request->input('clockIn'),
+                        'clock_out' => $request->input('clock_out', '00:00:00'),
+                        'late' => $request->input('late', '00:00:00'),
+                        'early_leaving' => $request->input('early_leaving', '00:00:00'),
+                        'overtime' => $request->input('overtime', '00:00:00'),
+                        'total_rest' => $request->input('total_rest', '00:00:00'),
+                        'created_by' => $request->input('createdBy'),
+                        'updated_at' => $request->input('updated_at', now()),
+                        'wfh_flag' => $status === 'Present(wfh)' ? 1 : 0,
+                    ];
+                    $newUser = AttendanceEmployee::create($data);
+
+                    $result = User::leftJoin('attendance_employees', function ($join) use ($date) {
+                        $join->on('users.id', '=', 'attendance_employees.employee_id') 
+                            ->where('attendance_employees.date', '=', $date);
+                    })
+                    ->select(
+                        'users.id',
+                        'users.name',
+                        'attendance_employees.date',
+                        'attendance_employees.employee_id',
+                        'attendance_employees.status'
+                    )
+                    ->get();
+                }
+                else
+                {
+                    $result = User::leftJoin('attendance_employees', 'users.id', '=', 'attendance_employees.employee_id')
+                    ->select(
+                        'users.id',
+                        'users.name',
+                        'attendance_employees.date',
+                        'attendance_employees.employee_id',
+                        'attendance_employees.status'
+                    )
+                    ->get();
+                }
+                // print "<pre>";
+                // print_r($result);exit;
+                return view('attendance.manage',compact('result'));
+            }
+        }
+            else
+            {
+                return redirect()->back()->with('error', __('Permission denied.'));
+            }
+    }
+
+
 
     public function bulkAttendance(Request $request)
     {

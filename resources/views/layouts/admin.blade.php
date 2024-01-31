@@ -9,7 +9,8 @@ $company_favicon = Utility::getValByName('company_favicon');
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <title>
-        {{ Utility::getValByName('title_text') ? Utility::getValByName('title_text') : config('app.name', 'HRMGo') }}
+       <?php /* <!-- Utility::getValByName('title_text') ? Utility::getValByName('title_text') : --> */?>
+        {{  config('app.name', 'HRMS') }}
         - @yield('page-title')</title>
     <link rel="icon"
         href="{{ $logo . '/' . (isset($company_favicon) && !empty($company_favicon) ? $company_favicon : 'favicon.png') }}"

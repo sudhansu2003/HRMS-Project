@@ -27,6 +27,28 @@
                         <i class="fas fa-tachometer-alt"></i>{{ __('Dashboard') }}
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('monthlyreport.index') }}" class="nav-link">
+                        <i class="fas fa-flag"></i>{{ __('Monthly Report') }}
+                    </a>
+                </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="#navbar-project" data-toggle="collapse" role="button" aria-expanded="" aria-controls="navbar-staff">
+                                <i class="fas fa-project-diagram"></i>{{ __('Project') }}
+                                <i class="fas fa-sort-up"></i>
+                            </a>
+                            <div class="collapse" id="navbar-project">
+                                <ul class="nav flex-column submenu-ul">
+                                        <li class="nav-item">
+                                            <a href=" {{ route('projectdetails.index') }} " class="nav-link">{{ __('Project Details') }}</a>
+                                        </li>
+                                    
+                                        <li class="nav-item">
+                                            <a href="{{ route('projectassigns.assignindex') }}" class="nav-link">{{ __('Project Assigns') }}</a>
+                                        </li>
+                                </ul>
+                            </div>
+                        </li>
                 @if(\Auth::user()->type=='super admin')
                     <li class="nav-item">
                         <a href="{{ route('user.index') }}" class="nav-link {{ request()->is('user*') ? 'active' : '' }}">
@@ -155,6 +177,7 @@
                                         <a href="{{ route('leave.index') }}" class="nav-link">{{ __('Manage Leave') }}</a>
                                     </li>
                                 @endcan
+                                
                                 @can('Manage Attendance')
                                     <li class="nav-item submenu-li">
                                         <a class="nav-link {{ (Request::route()->getName() == 'attendanceemployee.index' || Request::route()->getName() == 'attendanceemployee.bulkattendance') ? 'active' : 'collapsed' }}" href="#navbar-attendance" data-toggle="collapse" role="button" aria-expanded="{{ (Request::route()->getName() == 'attendanceemployee.index' || Request::route()->getName() == 'attendanceemployee.bulkattendance') ? 'true' : 'false' }}" aria-controls="navbar-attendance">
@@ -171,6 +194,11 @@
                                                         <a href="{{ route('attendanceemployee.bulkattendance') }}" class="nav-link">{{__('Bulk Attendance')}}</a>
                                                     </li>
                                                 @endcan
+                                                @can('Manage Attendance')
+                                                    <li class="nav-item {{ (Request::route()->getName() == 'attendanceemployee.manageattendance') ? 'active' : '' }}">
+                                                        <a href="{{ route('attendanceemployee.manageattendance') }}" class="nav-link">{{__('Manage Attendance')}}</a>
+                                                    </li>
+                                                @endcan
                                             </ul>
                                         </div>
                                     </li>
@@ -179,7 +207,6 @@
                         </div>
                     </li>
                 @endif
-
                 @if(Gate::check('Manage Indicator') || Gate::check('Manage Appraisal') || Gate::check('Manage Goal Tracking'))
                     <li class="nav-item">
                         <a class="nav-link {{ (Request::route()->getName() == 'indicator.index' || Request::route()->getName() == 'appraisal.index' || Request::route()->getName() == 'goaltracking.index') ? 'active' : 'collapsed' }}" href="#navbar-performance" data-toggle="collapse" role="button" aria-expanded="{{ (Request::route()->getName() == 'indicator.index' || Request::route()->getName() == 'appraisal.index' || Request::route()->getName() == 'goaltracking.index') ? 'true' : 'false' }}"

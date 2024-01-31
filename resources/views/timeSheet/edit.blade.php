@@ -9,6 +9,10 @@
                 </div>
             @endif
             <div class="form-group col-md-6">
+            {{ Form::label('project_name', __('Project'),['class'=>'form-control-label']) }}
+            {{ Form::select('project_name', $timeSheet->pluck('project_name','project_name') , null,array('class' => 'form-control font-style select2','required'=>'required')) }}
+            </div>
+            <div class="form-group col-md-6">
                 {{ Form::label('date', __('Date'),['class'=>'form-control-label']) }}
                 {{ Form::text('date',null, array('class' => 'form-control datepicker','required'=>'required')) }}
             </div>

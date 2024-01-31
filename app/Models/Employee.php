@@ -9,6 +9,7 @@ class Employee extends Model
     protected $fillable = [
         'user_id',
         'name',
+        'last_name',
         'dob',
         'gender',
         'phone',

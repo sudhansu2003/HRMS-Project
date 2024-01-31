@@ -50,7 +50,6 @@
                                 <div class="overflow-hidden widget-calendar">
                                     <div class="calendar e-height" data-toggle="event_calendar" id="event_calendar"></div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -62,7 +61,7 @@
                     <div class="card-header">
                         <h4>{{__('Mark Attandance')}}</h4>
                     </div>
-                    <div class="card-body dash-card-body">
+                     <div class="card-body dash-card-body">
                         <p class="text-muted pb-0-5">{{__('My Office Time: '.$officeTime['startTime'].' to '.$officeTime['endTime'])}}</p>
                         <center>
                             <div class="row">
@@ -86,7 +85,6 @@
                                 </div>
                             </div>
                         </center>
-
                     </div>
                 </div>
             </div>

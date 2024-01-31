@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="keywords" content="{{$companySettings['metakeyword']->value}}">
     <meta name="description" content="{{$companySettings['metadesc']->value}}">
-    <title>{{!empty($companySettings['title_text']) ? $companySettings['title_text']->value : config('app.name', 'HRMGo')}} - {{__('Career')}}</title>
+    <title>{{!empty($companySettings['title_text']) ? $companySettings['title_text']->value : config('app.name', 'HRMS')}} - {{__('Career')}}</title>
 
     <link rel="icon" href="{{asset(Storage::url('uploads/logo/')).'/'.(isset($companySettings['company_favicon']) && !empty($companySettings['company_favicon'])?$companySettings['company_favicon']->value:'favicon.png')}}" type="image" sizes="16x16">
 

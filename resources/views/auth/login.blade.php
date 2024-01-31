@@ -45,7 +45,7 @@
             </div>
 
             <h5 class="copyright-text">
-                {{(Utility::getValByName('footer_text')) ? Utility::getValByName('footer_text') :  __('Copyright PSHRMS') }} {{ date('Y') }}
+                {{(Utility::getValByName('footer_text')) ? Utility::getValByName('footer_text') :  __('Copyright © ThoughtSpheres Technologies Pvt. Ltd. ') }} {{ date('Y') }}
             </h5>
             <div class="all-select">
                 <a href="#" class="monthly-btn">

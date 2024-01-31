@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use app\Http\Controllers\TestController;
+use app\Http\Controllers\ProjectAssignController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,11 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/newtest','TestController@test');
+Route::get('/add/{num1}/{num2}','TestController@addition');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
-
 require __DIR__.'/auth.php';
 
 
@@ -98,8 +100,6 @@ Route::post(
         'XSS',
     ]
 );
-// End
-
 Route::resource('user', 'UserController')->middleware(
     [
         'auth',
@@ -588,7 +588,25 @@ Route::resource('ticket', 'TicketController')->middleware(
         'XSS',
     ]
 );
-
+Route::get('attendanceemployee/manageattendance', 'AttendanceEmployeeController@manageAttendance')
+    ->name('attendanceemployee.manageattendance')
+    ->middleware([
+        'auth',
+        'XSS',
+    ]
+);
+Route::post('attendanceemployee/updatestatus','AttendanceEmployeeController@manageAttendance')->name('attendanceemployee.updatestatus')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+ Route::post('attendanceemployee/insertrecord','AttendanceEmployeeController@manageAttendance')->name('attendanceemployee.insertrecord')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
 Route::get('attendanceemployee/bulkattendance', 'AttendanceEmployeeController@bulkAttendance')->name('attendanceemployee.bulkattendance')->middleware(
     [
         'auth',
@@ -622,8 +640,66 @@ Route::resource('timesheet', 'TimeSheetController')->middleware(
     ]
 );
 
-
-
+Route::resource('projectdetails', 'ProjectDetailsController')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::get('projectdetail/edit/{project_id}','ProjectDetailsController@edit')->name('projectdetail.edit')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::patch('projectdetail/update/{project_id}','ProjectDetailsController@update')->name('projectdetail.update')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::delete('projectdetail/destroy/{project_id}','ProjectDetailsController@destroy')->name('projectdetail.destroy')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::get('projectassigns','ProjectDetailsController@assignIndex')->name('projectassigns.assignindex')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::get('projectassigns/createassign/{project_id}','ProjectDetailsController@createAssign')->name('projectassigns.createassign')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::get('projectassigns/assignproject/{project_id}','ProjectDetailsController@assignProject')->name('projectassigns.assignproject')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::post('projectassigns/storeassign','ProjectDetailsController@storeAssign')->name('projectassigns.storeassign')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+    );
+Route::delete('projectassigns/unassign/{project_name}/{user_name}','ProjectDetailsController@deleteAssignedUser')->name('projectassigns.unassign')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
+Route::resource('monthlyreport','MonthlyReportController')->middleware(
+    [
+        'auth',
+        'XSS',
+    ]
+);
 Route::resource('expensetype', 'ExpenseTypeController')->middleware(
     [
         'auth',

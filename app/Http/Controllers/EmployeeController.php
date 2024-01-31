@@ -82,6 +82,7 @@ class EmployeeController extends Controller
             $validator = \Validator::make(
                 $request->all(), [
                                    'name' => 'required',
+                                   'last_name' =>'required',
                                    'dob' => 'required',
                                    'gender' => 'required',
                                    'phone' => 'required',
@@ -128,6 +129,7 @@ class EmployeeController extends Controller
                 [
                     'user_id' => $user->id,
                     'name' => $request['name'],
+                    'last_name'=>$request['last_name'],
                     'dob' => $request['dob'],
                     'gender' => $request['gender'],
                     'phone' => $request['phone'],

@@ -1,0 +1,562 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+body {
+  margin: 0;
+  /* font-family: 'Nunito', sans-serif !important; */
+  background-color: #FBFAFB !important;
+  font-family: 'Noto Sans', sans-serif, 'Poppins', sans-serif !important;
+  /* font-family: 'Poppins', sans-serif; */
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace, Poppins;
+}
+.css-1horeey-MuiDrawer-docked .MuiDrawer-paper, .css-ole3vr-MuiPaper-root-MuiAppBar-root{
+  background-color: #edf2f9 !important;
+}
+h1, h2, h3, h4, h5, h6, span, p {
+  font-family: 'Poppins', sans-serif !important;
+}
+.MuiList-root, .css-1mylcg4-MuiTypography-root{
+  font-family: 'Poppins', sans-serif !important;
+  font-size: 0.9rem !important;
+}
+.MuiListItem-root{
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.premium-ul li{
+  list-style-type: none;
+}
+.premium-ul h6 i{
+  width: 1em;
+  margin-right: 10px;
+  font-weight: bold;
+  font-size: 16px;
+}
+html, body{
+  overflow-x: hidden !important;
+}
+.loginSection{
+  background: #edf2f9;
+  overflow-y: hidden;
+}
+/* .loginInput .MuiGrid-root.MuiGrid-item span.MuiTypography-root{
+  font-size: 15px !important;
+  color: #d40;
+} */
+.css-1horeey-MuiDrawer-docked .MuiDrawer-paper{
+  overflow-x: hidden;
+}
+
+.css-1pr8iuh-MuiButtonBase-root-MuiListItem-root .MuiTypography-root{
+  font-weight: normal !important;
+}
+
+/**for company upload logo**/
+.uploadpicker.MuiBox-root.css-vcebel{
+  margin: 30px auto !important;
+  height: auto !important;
+  /* padding: 30px auto; */
+}
+.uploadimgfitsize{
+  width: 120px !important;
+  height: 120px;
+}
+
+.css-6hp17o-MuiList-root-MuiMenu-list{
+  padding: 10px !important;
+}
+
+/* input::-webkit-inner-spin-button, input::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    -moz-appearance: none;
+     margin: 0; 
+} */
+input{
+  -webkit-appearance: none !important; 
+  -moz-appearance: none !important;
+}
+
+.profileimg img{
+  border-radius: 50%;
+  width:50px;
+  height: 50px;
+  /* margin: 0 auto; */
+}
+.userstatus, .useredit{
+  position: absolute;
+  padding: 6px;
+  margin: 0 auto;
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+.userstatus{
+  top:10px;
+  /* right:-5px; */
+  /* right: 30px; */
+  left: 10px;
+}
+.useredit{
+  top:10px;
+  right:0;
+  /* font-size: 15px; */
+}
+.userDelete{
+  position: absolute;
+  top:0;
+  right:0;
+  background-color: #f0d2d2;
+  border-radius: 0 0  0 10px;
+  padding: 3px;
+  color: #db1414;
+}
+
+.css-134gy81-MuiPaper-root-MuiCard-root.projectcard{
+  /* background-color: #e3e6ec; */
+  /* border: 1px solid #e3e6ec; */
+  cursor: pointer;
+  transition:all .1s ease-in-out;
+  -moz-transition:all .1s ease-in-out;
+  -webkit-transition:all .1s ease-in-out;
+}
+.css-134gy81-MuiPaper-root-MuiCard-root.projectcard:hover{
+  box-shadow: 0px 0px 10px #d1d1d1;
+  background-color: #d1d1d1;
+  transition:all .5s ease-in-out;
+  -moz-transition:all .5s ease-in-out;
+  -webkit-transition:all .5s ease-in-out;
+}
+
+.etextfield.css-9z687a-MuiInputBase-root{
+  -webkit-align-items: top !important;
+  -ms-align-items: top !important;
+  /* -webkit-box-align: center; */
+  /* -ms-flex-align: center; */
+  align-items: top !important;
+}
+
+.kycprofimg img{
+  height: 60px; 
+  width:60px !important;
+}
+.kycpicker .MuiBox-root.css-vcebel{
+  margin: 0 auto !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+.custom_input .MuiFormControl-root{
+  width: auto !important;
+  vertical-align: middle !important;
+  margin-left: 10px !important;
+}
+.custom_input .MuiInputBase-root{
+  border-radius: 6px !important;
+  padding: 6px 15px !important;
+  width: 90px !important;
+}
+.custom_input .MuiInputBase-input, .inputbg .MuiInputBase-input{
+  color: #000 !important;
+  /* text-align: center !important; */
+}
+
+.inputbg .MuiInputBase-root{
+  background: none !important;
+}
+
+.health_Tab .MuiTableCell-root{
+  font-family: 'Poppins', sans-serif !important;
+  padding: 5px;
+}
+
+.health_Tab textarea{
+  text-align: left;
+  overflow: hidden;
+  border: 1px solid #ccc;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none !important;
+  height: 60px;
+  width: 100%;
+  background: #fff;
+  padding: 5px 10px;
+}
+.health_Tab .MuiBox-root.css-1567tvh{
+  display: block !important;
+}
+/* .inputbg{
+  background: #eceaf2;
+} */
+
+/* menu item */
+.css-cveggr-MuiListItemIcon-root{
+  min-width: 40px !important;
+}
+
+.rateSpan{
+  width: 6%;
+  background: #f1f1f1;
+  padding: 10px 0 10px 10px;
+  border-radius: 10px 0 0 10px;
+  float: left;
+  text-align: center;
+}
+.rateSpan > .MuiInputBase-root{
+  width:94% !important;
+}
+.forPricesymbol .css-q8hpuo-MuiFormControl-root{
+  width: 94% !important;
+}
+.forPricesymbol .MuiInputBase-root{
+  width: 100% !important;
+  border-radius: 0 10px 10px 0 !important;
+  padding-left: 0 !important;
+  color: #000 !important
+}
+.HealthPdf, .HealthPdf .MuiTableCell-root{
+  border:1px solid #666;
+}
+.PdfImg{
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border:1px solid #ccc;
+  object-fit: cover;
+  background-color: #d1d1d1;
+  float: left;
+  margin-right: 20px;
+}
+.HealthPdf label{
+  display: inline-block !important;
+}
+.pwdDialog .css-1eu79vr-MuiPaper-root-MuiDialog-paper{
+  max-width: 500px !important;
+  width: 100% !important;
+}
+
+.ForCounter {
+	width: 15px;
+	height: 15px;
+	padding: 2px 0px;
+	background: #d40;
+	border-radius: 50%;
+	color: #fff;
+	font-size: 9px;
+	font-weight: bold;
+	position: absolute;
+	top: 0px;
+	right: 1px;
+}
+
+.HealthPdf .css-dmmspl-MuiFormGroup-root{
+  display: block !important;
+}
+
+/**For ID Card**/
+.IdCard{
+  /* width:100%; */
+  /* margin:  0 auto; */
+  /* position: absolute;
+  top: 15%;
+  left: 22%; */
+  /* background: #800; */
+  border-radius: 5px;
+  border:1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0px 0px 10px #d1d1d1;
+}
+.IdCard img{
+  width: 100%;
+  height: 65%;
+  object-fit: cover;
+}
+.fortext .MuiTypography-root{
+  font-size: 13px;
+  margin-bottom: 5px !important;
+}
+.uploadinput .MuiInputBase-input{
+  height: auto !important;
+}
+
+.uploadimglabel{
+  border:2px dashed #abc4e6;
+  padding: 20px 0;
+  font-size: 40px;
+  color: #2362b7;
+  text-align: center;
+}
+.css-1eu79vr-MuiPaper-root-MuiDialog-paper{
+  width: 100% !important;
+}
+.barcodesvg{
+  height: 50px;
+  width: 100%;
+}
+.uploadinputphoto .MuiInputBase-input{
+  height: auto !important;
+  /* padding: 12px 15px !important; */
+}
+.Badgeico{
+  position: absolute;
+  top: 0px;
+  right: 5px;
+}
+.EditDelbtn{
+  border-radius: 50% !important;
+  padding: 8px 8px !important;
+  margin: 0 5px !important;
+  width: auto !important;
+}
+.downloadicon, .printicon{
+  position: absolute;
+  top:0;
+  color: #2c7be5;
+  cursor: pointer;
+}
+/* .downloadicon{
+  right:30px;
+} */
+.printicon{
+  right: 5px;
+}
+.IdCard svg{
+  width: 100%;
+  height: 80px;
+}
+.ForCheckbox .MuiFormControl-root{
+  display: block !important;
+}
+.ForCheckbox .MuiFormControlLabel-root{
+  margin-right: 30px;
+  margin-bottom: 0 !important;
+}
+.ForCheckbox .MuiFormGroup-root{
+  display: inline-block !important;
+}
+.ForCheckbox .MuiFormControlLabel-label, .ForCheckbox .MuiTableCell-root{
+  font-size: 15px !important;
+  color:#a6b0bb !important;
+}
+
+/* .FormBTable{
+  max-width: 900px;
+  width: 100%;
+  overflow-x: auto;
+  margin: 20px auto;
+} */
+/* .FormTable{
+  width: 100% !important;
+} */
+/* .MuiTable-root.FormTable.css-rqglhn-MuiTable-root{
+  width: 55% !important;
+  display: block !important;
+  overflow: auto;
+  max-height: 400px;
+} */
+.FormTable tr, .FormTable th, .FormTable td {
+  border: 1px solid #333;
+  font-size: 12px;
+  padding: 5px 10px;
+  color: #344050;
+  text-align: center;
+  /* font-weight: bold; */
+}
+tr.deductdetails{
+  height: 130px !important;
+}
+ .FormTable th, .FormTable td{
+  line-height: 1rem;
+}
+.rotatetd, 
+.FormTableA p{
+  -ms-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+}
+.Healthuploadfile{
+  position: absolute;
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.ForRolecheckbox .MuiFormControl-root{
+  display: inline-block !important;
+  vertical-align: middle;
+  margin-left: 5px;
+}
+.safetyimg{
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.chipbgspan{
+  background: #066a09 !important;
+  width: 100px;
+  font-size: 12px !important;
+  /* float: left; */
+}
+.chipchkspan{
+  background: #c3c6ca !important;
+  color: #000 !important;
+  /* border: 1px solid #2c7be5; */
+}
+.chipspan, .chipbgspan, .chipchkspan{
+  background: #2c7be5;
+  display: inline-block;
+  color: #fff;
+  font-size: 10px;
+  padding: 3px 6px;
+  border-radius: 5px;
+  margin: 2px 5px;
+  text-transform: capitalize;
+}
+.chipchkspan .MuiCheckbox-root{
+  padding: 2px 9px;
+}
+.dashboarduserimg{
+  width: 80px; 
+  height: 80px;
+  border-radius: 50%;
+}
+.dashboarduserimg img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/**Common input color**/
+/* .MuiInputBase-input{
+  -webkit-text-fill-color: #2c7be5 !important;
+} */
+.viewwGrid{
+  /* background: #edf2f9; */
+  background-image: url("../public/img/texture.jpg");
+  background-size: cover;
+  font-size: 14px;
+}
+.viewwGrid p{
+  margin: 0 0 5px 0;
+}
+
+.table.Tableform{
+  border:1px solid #000;
+}
+.Row_border_none th{
+  border-bottom: 0px;
+}
+.Tableform .tableform th, .Tableform .tableform td{
+  /* border:1px solid #edf2f9; */
+  border:1px solid #000;
+  color: #000;
+  font-size: 11px;
+  line-height: 1rem;
+  padding: 22px 6px !important;
+  text-align: center;
+}
+
+.proformatable, .proformatable td, .proformatable th{
+  border: 1px solid #000;
+}
+.ForBorderBottom th, .ForBorderBottom td{
+  border-bottom: 0px !important;
+}
+.ForBorder th, .ForBorder td{
+  border: 1px solid #000;
+}
+.BorderSpan{
+  border-bottom: 2px dotted #000;
+  display: inline-block;
+  margin-left: 5px; 
+  min-width: 30%;
+}
+.ForBorder.Thead th{
+  font-weight: normal;
+  padding: 6px 10px;
+}
+
+/* table#table-to-xls{
+  display: block !important;
+  width: 100%;
+} */
+
+/**for scroll to top**/
+.scroll-top{
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  z-index: 9999;
+}
+.scroll-top h3{
+  width: 50px;
+  height: 50px;
+  background: #1f96ca;
+  color: #fff;
+  border-radius: 50%; 
+  text-align: center;
+  transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -webkit-transition: all 0.5s ease-in-out;
+}
+.scroll-top h3:hover{
+  background: #000;
+  transition: all 0.1s ease-in-out;
+  -moz-transition: all 0.1s ease-in-out;
+  -webkit-transition: all 0.1s ease-in-out;
+}
+
+
+.MainMenu{
+  padding-left: 0 !important;
+  display: block !important;
+}
+.MainMenu .css-9ir507-MuiButtonBase-root-MuiListItemButton-root{
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.DropdownMenu{
+  position: static !important;
+  top: 100%;
+  left: 0;
+  background: #edf2f9;
+  width: 100% !important;
+  z-index: 999;
+}
+.DropdownMenu li .css-9ir507-MuiButtonBase-root-MuiListItemButton-root{
+  padding: 0 !important;
+}
+/* .DropdownMenu .MuiButtonBase-root:hover .MuiListItemButton-root{
+  background-color: none !important;
+} */
+.MainMenu .MuiSvgIcon-root{
+  color: #878787;
+}
+
+.table.Tableform.AttendanceTable{
+  width: 100%;
+  display: block !important;
+  border: 1px solid #ccc;
+}
+.CircularLoading{
+  width: 30px;
+  height: 30px;
+  position: relative;
+  left: 50%;
+  right: 50%;
+
+}
+.AttendanceCustomCheckbox .css-i4bv87-MuiSvgIcon-root{
+  width:0.7em;
+  height:0.7em;
+}
+.DropdownMenu .css-9ir507-MuiButtonBase-root-MuiListItemButton-root:hover{
+  background-color: transparent!important;
+}

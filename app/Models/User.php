@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -55,6 +56,11 @@ class User extends Authenticatable
     public function currentLanguage()
     {
         return $this->lang;
+    }
+
+    public function projectMappings()
+    {
+        return $this->hasMany(UserProjectMapping::class, 'user_id');
     }
 
     public function creatorId()

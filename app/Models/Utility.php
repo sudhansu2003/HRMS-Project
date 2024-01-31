@@ -16,6 +16,8 @@ class Utility extends Model
     public static function settings()
     {
         $data = DB::table('settings');
+        // print "<pre>";
+        // print_r($data);exit;
         if (\Auth::check()) {
             $userId = \Auth::user()->creatorId();
             $data   = $data->where('created_by', '=', $userId);
@@ -42,8 +44,8 @@ class Utility extends Model
             "employee_prefix" => "#EMP00",
             "footer_title" => "",
             "footer_notes" => "",
-            "company_start_time" => "09:00",
-            "company_end_time" => "18:00",
+            "company_start_time" => "10:00",
+            "company_end_time" => "19:00",
             'user_create' => '1',
             'employee_create' => '1',
             'payroll_create' => '1',
@@ -59,7 +61,7 @@ class Utility extends Model
             'leave_status' => '1',
             "default_language" => "en",
             "display_landing_page" => "off",
-            "ip_restrict" => "on",
+            "ip_restrict" => "Off",
             "title_text" => "",
             "footer_text" => "",
             "gdpr_cookie" => "",
@@ -73,7 +75,6 @@ class Utility extends Model
         foreach ($data as $row) {
             $settings[$row->name] = $row->value;
         }
-
         return $settings;
     }
 
